@@ -8,7 +8,8 @@ jobs:
   claude-fix:
     if: |
       github.event.issue.pull_request == null &&
-      contains(github.event.comment.body, '@claude')
+      contains(github.event.comment.body, '@claude') &&
+      github.event.comment.user.login == 'winding-lines'
     runs-on: ubuntu-latest
     permissions:
       contents: write
