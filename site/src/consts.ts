@@ -2,4 +2,4 @@
 // You can import this data from anywhere in your site by using the `import` keyword.
 
 export const SITE_TITLE = "Dacular";
-export const SITE_DESCRIPTION = "Run a local AI agent stack on your Mac mini — install the Claude skill to get started.";
+export const SITE_DESCRIPTION = "Your data. Your eyes only.";
