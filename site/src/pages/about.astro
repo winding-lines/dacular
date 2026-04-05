@@ -1,0 +1,34 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+	title="About Dacular"
+	description="What Dacular is and why it exists"
+	pubDate={new Date('2025-01-01')}
+	heroImage="/blog-placeholder-about.jpg"
+>
+	<p>
+		Dacular is an experiment in running AI agent workloads entirely on local hardware — specifically
+		the Mac mini. The goal is to give users a self-contained AI stack they fully control, with no
+		data leaving their machine.
+	</p>
+
+	<p>
+		The stack combines <strong>zeroclaw</strong> (an agent framework) with
+		<strong>Modular Max</strong> running <strong>Gemma3</strong> as the local inference engine.
+		zeroclaw handles orchestration and tool use; Max provides fast, on-device LLM inference.
+	</p>
+
+	<p>
+		The setup is intentionally isolated: a dedicated macOS user account runs the AI stack, keeping
+		it separate from personal data. Data from the main account can be mounted when Claude is not
+		running, but the mount is removed before Claude starts — so private data is never accessible
+		during an agent session.
+	</p>
+
+	<p>
+		Installation is handled by the <code>install-dacular</code> Claude skill, which guides users
+		through account creation, software installation, and configuration in a single session.
+	</p>
+</Layout>

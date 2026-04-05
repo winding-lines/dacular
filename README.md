@@ -1,64 +1,46 @@
-# Astro Starter Kit: Blog
+# Dacular
 
-[![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/astro-blog-starter-template)
+Dacular is an experimental project that lets you run a local AI agent stack on a Mac mini and expose it as a Claude skill others can install.
 
-![Astro Template Preview](https://github.com/withastro/astro/assets/2244813/ff10799f-a816-4703-b967-c78997e8323d)
+## What it is
 
-<!-- dash-content-start -->
+The stack has two components running locally:
 
-Create a blog with Astro and deploy it on Cloudflare Workers as a [static website](https://developers.cloudflare.com/workers/static-assets/).
+- **[zeroclaw](https://github.com/zeroclaw)** — agent framework
+- **[Modular Max](https://www.modular.com/max)** — inference engine running Gemma3
 
-Features:
+Users install the `install-dacular` skill from the Claude skill marketplace and follow the guided setup to get both systems running and talking to each other on their own Mac mini.
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and OpenGraph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
-- ✅ Built-in Observability logging
+## How the setup works
 
-<!-- dash-content-end -->
+The skill walks through these steps:
 
-## Getting Started
+1. **Create a dedicated macOS account** — a clean user account with none of your personal data, used exclusively for the AI stack.
+2. **Install zeroclaw** — agent framework installed into the new account.
+3. **Install Modular Max with Gemma3** — local inference engine, configured to accept requests from zeroclaw.
+4. **Wire them together** — configure zeroclaw to use the local Max endpoint for inference.
+5. **Data isolation** — personal data lives in your main account. You can mount it from there to work with it, but the mount must be removed before starting Claude — private data is never accessible while Claude is running.
 
-Outside of this repo, you can start a new project with this template using [C3](https://developers.cloudflare.com/pages/get-started/c3/) (the `create-cloudflare` CLI):
+## Platform support
 
-```bash
-npm create cloudflare@latest -- --template=cloudflare/templates/astro-blog-starter-template
+Currently **Mac mini only**.
+
+## Repository structure
+
+```
+site/       Astro site deployed to Cloudflare Workers (dacular.dev)
+skills/     Claude skill definitions
+  install-dacular/   Guided setup skill for the local AI stack
 ```
 
-A live public deployment of this template is available at [https://astro-blog-starter-template.templates.workers.dev](https://astro-blog-starter-template.templates.workers.dev)
+## Developing the site
 
-## 🚀 Project Structure
+```bash
+cd site
+npm install
+npm run dev       # localhost:4321
+npm run build     # production build to site/dist/
+npm run deploy    # deploy to Cloudflare Workers
+```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
-
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                           | Action                                           |
-| :-------------------------------- | :----------------------------------------------- |
-| `npm install`                     | Installs dependencies                            |
-| `npm run dev`                     | Starts local dev server at `localhost:4321`      |
-| `npm run build`                   | Build your production site to `./dist/`          |
-| `npm run preview`                 | Preview your build locally, before deploying     |
-| `npm run astro ...`               | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help`         | Get help using the Astro CLI                     |
-| `npm run build && npm run deploy` | Deploy your production site to Cloudflare        |
-| `npm wrangler tail`               | View real-time logs for all Workers              |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+Pushes to `main` that touch `site/` are automatically deployed via GitHub Actions.
