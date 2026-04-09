@@ -14,29 +14,8 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<Header />
 		<main>
 			<h1>Dacular</h1>
-			<p>
-				Dacular is an experimental project to run a local AI agent stack on a Mac mini and expose
-				it as a Claude skill anyone can install.
-			</p>
-			<p>The stack runs two systems locally:</p>
-			<ul>
-				<li><strong>zeroclaw</strong> — agent framework</li>
-				<li><strong>Modular Max with Gemma3</strong> — local inference engine</li>
-			</ul>
-			<p>
-				Install the <code>install-dacular</code> skill from the Claude skill marketplace to get a
-				guided setup that wires everything together on your Mac mini.
-			</p>
-			<h2>How it works</h2>
-			<ol>
-				<li>A dedicated macOS account is created for the AI stack, isolated from your personal data.</li>
-				<li>zeroclaw and Modular Max are installed into that account and configured to talk to each other.</li>
-				<li>
-					Before starting Claude, any data mount from the main account is removed — private data
-					is never accessible while Claude is running.
-				</li>
-			</ol>
-			<p><em>Mac mini only for now.</em></p>
+			<h2>Install</h2>
+			<pre><code>curl -fsSL https://raw.githubusercontent.com/dacular-org/install/main/install.sh | sh</code></pre>
 		</main>
 		<Footer />
 	</body>
